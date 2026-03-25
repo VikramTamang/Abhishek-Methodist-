@@ -384,7 +384,7 @@ if (window.scrollY > 50) navbar.classList.add('scrolled');
 // ======================================================
 // DYNAMIC CONTENT — Fetch from backend API
 // ======================================================
-const PUBLIC_API = 'http://localhost:5001/api/content';
+const PUBLIC_API = 'https://abhishek-methodist-church.onrender.com/api/content';
 
 async function safeFetch(url) {
   try {

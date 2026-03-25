@@ -1,4 +1,4 @@
-const API_URL = 'https://abhishek-methodist-church.onrender.com';
+const API_URL = 'https://abhishek-methodist-church.onrender.com/api';
 let token = localStorage.getItem('adminToken');
 
 // DOM Elements
