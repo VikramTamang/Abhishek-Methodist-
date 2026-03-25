@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Abhisek Methodist Church</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Login Area -->
+    <div id="loginSection" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h2>Admin Panel</h2>
+                <p>Abhisek Methodist Church</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="admin@abhisekmethodistchurch.org">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-primary" id="loginBtn">Secure Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Area (Hidden by default) -->
+    <div id="dashboardSection" class="dashboard-container" style="display: none;">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <i class="fa-solid fa-church"></i> AMC Admin
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-target="homeSettings"><i class="fa-solid fa-house"></i> Home Settings</a>
+                <a href="#" class="nav-item" data-target="aboutSettings"><i class="fa-solid fa-users"></i> About Us</a>
+                <a href="#" class="nav-item" data-target="historySettings"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                <a href="#" class="nav-item" data-target="branchSettings"><i class="fa-solid fa-code-branch"></i> Branches</a>
+                <a href="#" class="nav-item" data-target="testimonySettings"><i class="fa-solid fa-comment-dots"></i> Testimonies</a>
+                <a href="#" class="nav-item" data-target="contactSettings"><i class="fa-solid fa-address-book"></i> Contact Info</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" target="_blank" class="btn btn-primary" style="width:100%; margin-bottom: 10px; text-decoration:none; justify-content:center;"><i class="fa-solid fa-globe"></i> View Website</a>
+                <button id="seedBtn" class="btn btn-danger-outline" style="width:100%; margin-bottom:10px;"><i class="fa-solid fa-database"></i> Seed Default Content</button>
+                <button id="logoutBtn" class="btn btn-danger-outline" style="width:100%;"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="topbar">
+                <h2 id="pageTitle">Dashboard Workspace</h2>
+                <div class="user-profile">
+                    <span id="adminUserEmail">admin@abhisekmethodistchurch.org</span>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                
+                <!-- Home Settings Panel -->
+                <section id="homeSettings" class="admin-panel active-panel">
+                    <div class="panel-header">
+                        <h3>Homepage Content</h3>
+                        <p>Manage the main introductory text and announcements.</p>
+                    </div>
+                    <form id="homeForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Hero Title</label>
+                            <input type="text" id="homeHeroTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hero Subtitle</label>
+                            <input type="text" id="homeHeroSubtitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Pastor Message Title</label>
+                            <input type="text" id="homePastorTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Pastor Message Body</label>
+                            <textarea id="homePastorBody" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Fellowship Information</label>
+                            <textarea id="homeFellowshipInfo" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Home Content</button>
+                    </form>
+                </section>
+
+                <!-- About Us Panel -->
+                <section id="aboutSettings" class="admin-panel">
+                    <div class="panel-header">
+                        <h3>About Us</h3>
+                        <p>Manage mission, vision and general description.</p>
+                    </div>
+                    <form id="aboutForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Church Description</label>
+                            <textarea id="aboutDesc" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Mission Statement</label>
+                            <textarea id="aboutMission" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Vision Statement</label>
+                            <textarea id="aboutVision" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save About Content</button>
+                    </form>
+                </section>
+
+                <!-- History Panel -->
+                <section id="historySettings" class="admin-panel">
+                    <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3>Church History</h3>
+                            <p>Manage timeline events.</p>
+                        </div>
+                        <button id="addHistoryBtn" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Event</button>
+                    </div>
+                    <div id="historyList" class="data-list">
+                        <!-- Rendered by JS -->
+                    </div>
+                </section>
+
+                <!-- Branch Panel -->
+                <section id="branchSettings" class="admin-panel">
+                    <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3>Church Branches</h3>
+                            <p>Manage locations.</p>
+                        </div>
+                        <button id="addBranchBtn" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Branch</button>
+                    </div>
+                    <div id="branchList" class="data-list">
+                        <!-- Rendered by JS -->
+                    </div>
+                </section>
+                
+                <!-- Testimony Panel -->
+                <section id="testimonySettings" class="admin-panel">
+                    <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3>Testimonies</h3>
+                            <p>Manage user testimonies.</p>
+                        </div>
+                        <button id="addTestimonyBtn" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Testimony</button>
+                    </div>
+                    <div id="testimonyList" class="data-list">
+                        <!-- Rendered by JS -->
+                    </div>
+                </section>
+
+                <!-- Contact Panel -->
+                <section id="contactSettings" class="admin-panel">
+                    <div class="panel-header">
+                        <h3>Contact Information</h3>
+                        <p>Manage physical address, phone, and email.</p>
+                    </div>
+                    <form id="contactForm" class="admin-form">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" id="contactAddress">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" id="contactPhone">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="contactEmail">
+                        </div>
+                        <div class="form-group">
+                            <label>Map Embed Location (Google Maps SRC URL)</label>
+                            <textarea id="contactMap" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Contact Info</button>
+                    </form>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Reusable Modal Layout for adding/editing items (History, Branch, Testimony) -->
+    <div id="itemModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modalTitle">Edit Item</h3>
+            <form id="modalForm" class="admin-form">
+                <!-- Inputs injected dynamically via JS based on type -->
+                <div id="modalInputs"></div>
+                <button type="submit" class="btn btn-primary" id="modalSaveBtn">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

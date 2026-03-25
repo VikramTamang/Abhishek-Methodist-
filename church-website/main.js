@@ -380,3 +380,114 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ======================================================
 // Apply scrolled class immediately if page reloads mid-scroll
 if (window.scrollY > 50) navbar.classList.add('scrolled');
+
+// ======================================================
+// DYNAMIC CONTENT — Fetch from backend API
+// ======================================================
+const PUBLIC_API = 'http://localhost:5001/api/content';
+
+async function safeFetch(url) {
+  try {
+    const res = await fetch(url);
+    if (res.ok) return await res.json();
+  } catch (e) {
+    // Backend offline — keep static HTML fallback
+  }
+  return null;
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el && value) el.textContent = value;
+}
+
+// Load Home content
+async function loadPublicHome() {
+  const data = await safeFetch(`${PUBLIC_API}/home`);
+  if (!data) return;
+  setText('heroSubtitle', data.heroSubtitle);
+  setText('pastorMsgTitle', data.pastorMessageTitle);
+  setText('pastorMsgBody', data.pastorMessageBody);
+}
+
+// Load About content
+async function loadPublicAbout() {
+  const data = await safeFetch(`${PUBLIC_API}/about`);
+  if (!data) return;
+  setText('aboutVision', data.vision);
+  setText('aboutMission', data.mission);
+}
+
+// Load Contact content
+async function loadPublicContact() {
+  const data = await safeFetch(`${PUBLIC_API}/contact`);
+  if (!data) return;
+  setText('publicAddress', data.address);
+  setText('publicPhone', data.phone);
+  setText('publicEmail', data.email);
+  if (data.mapLocation) {
+    const iframe = document.getElementById('publicMapIframe');
+    if (iframe) iframe.src = data.mapLocation;
+  }
+}
+
+// Load Branches
+async function loadPublicBranches() {
+  const data = await safeFetch(`${PUBLIC_API}/branch`);
+  if (!data || data.length === 0) return;
+  const grid = document.getElementById('publicBranchesGrid');
+  if (!grid) return;
+  const colors = ['branch-blue', 'branch-red', 'branch-purple'];
+  grid.innerHTML = data.map((branch, i) => `
+    <div class="branch-card" data-animate="fade-up" data-delay="${i * 100}">
+      <div class="branch-img-wrap">
+        ${branch.imageUrl
+          ? `<img src="http://localhost:5000${branch.imageUrl}" alt="${branch.name}" style="width:100%;height:100%;object-fit:cover;border-radius:8px 8px 0 0;">`
+          : `<div class="branch-img-placeholder ${colors[i % colors.length]}"><i class="fas fa-church"></i></div>`}
+      </div>
+      <div class="branch-info">
+        <div class="branch-tag">Branch</div>
+        <h4>${branch.name}</h4>
+        <div class="branch-detail"><i class="fas fa-map-marker-alt"></i> ${branch.location}</div>
+        ${branch.details ? `<div class="branch-detail"><i class="fas fa-info-circle"></i> ${branch.details}</div>` : ''}
+        <a href="#contact" class="branch-btn">Get Directions</a>
+      </div>
+    </div>
+  `).join('');
+  // Re-observe newly added elements for scroll animations
+  grid.querySelectorAll('[data-animate]').forEach(el => animateObserver.observe(el));
+}
+
+// Load Testimonies
+async function loadPublicTestimonies() {
+  const data = await safeFetch(`${PUBLIC_API}/testimony`);
+  if (!data || data.length === 0) return;
+  const slider = document.getElementById('testimoniesSlider');
+  if (!slider) return;
+  const colors = ['#1a56db,#3b82f6', '#be123c,#f43f5e', '#7c3aed,#a855f7', '#d97706,#f59e0b', '#059669,#10b981'];
+  slider.innerHTML = data.map((t, i) => `
+    <div class="testimony-card">
+      <div class="tc-quote"><i class="fas fa-quote-left"></i></div>
+      <p class="tc-text">${t.message}</p>
+      <div class="tc-stars">★★★★★</div>
+      <div class="tc-author">
+        <div class="tc-avatar" style="background: linear-gradient(135deg, ${colors[i % colors.length]})">${t.name.charAt(0).toUpperCase()}</div>
+        <div>
+          <div class="tc-name">${t.name}</div>
+          <div class="tc-role">Church Member</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  // Re-initialise the slider after DOM update
+  if (typeof setupSlider === 'function') setupSlider();
+}
+
+// Initialise all dynamic sections on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadPublicHome();
+  loadPublicAbout();
+  loadPublicContact();
+  loadPublicBranches();
+  loadPublicTestimonies();
+});

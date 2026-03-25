@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -71,11 +71,11 @@
       <div class="hero-badge" data-animate="fade-down">
         <i class="fas fa-cross"></i> Welcome to Our Church Family
       </div>
-      <h1 class="hero-title" data-animate="fade-up">
+      <h1 class="hero-title" data-animate="fade-up" id="heroTitle">
         <span class="gradient-text">Abhisek</span><br />
         Methodist Church
       </h1>
-      <p class="hero-subtitle" data-animate="fade-up" data-delay="200">
+      <p class="hero-subtitle" data-animate="fade-up" data-delay="200" id="heroSubtitle">
         A place of faith, hope, and boundless love. Come as you are,<br />
         and be transformed by God's grace.
       </p>
@@ -131,13 +131,11 @@
         </div>
         <div class="pastor-message">
           <div class="section-eyebrow">A Word from the Pulpit</div>
-          <h2>Welcome to Our Family in Christ</h2>
+          <h2 id="pastorMsgTitle">Welcome to Our Family in Christ</h2>
           <p class="pastor-quote">"Where two or three gather in my name, there am I with them."</p>
-          <p>Dear beloved friends and visitors, you are warmly welcomed to Abhisek Methodist Church — a community built
+          <p id="pastorMsgBody">Dear beloved friends and visitors, you are warmly welcomed to Abhisek Methodist Church — a community built
             on love, rooted in Scripture, and committed to making disciples of Christ. Whether you are searching for
             meaning, seeking community, or deepening your faith, you have found a home here.</p>
-          <p>We believe that every person has a unique purpose, and we are here to walk alongside you on your journey.
-            Come, worship with us every Saturday and experience the transforming power of God's presence.</p>
           <div class="pastor-sig">
             <div class="sig-line">— Rev. Singa Bahadur Tamang </div>
             <div class="sig-title">Senior Pastor, Abhisek Methodist Church</div>
@@ -171,7 +169,7 @@
               <div class="pillar-icon"><i class="fas fa-eye"></i></div>
               <div>
                 <h4>Our Vision</h4>
-                <p>To be a vibrant, Christ-centered community that impacts every sphere of life — family, society, and
+                <p id="aboutVision">To be a vibrant, Christ-centered community that impacts every sphere of life — family, society, and
                   nation — with the Gospel of Jesus Christ.</p>
               </div>
             </div>
@@ -179,7 +177,7 @@
               <div class="pillar-icon"><i class="fas fa-bullseye"></i></div>
               <div>
                 <h4>Our Mission</h4>
-                <p>To love God, grow together in faith, serve our community, and make disciples who transform the world
+                <p id="aboutMission">To love God, grow together in faith, serve our community, and make disciples who transform the world
                   through the power of the Holy Spirit.</p>
               </div>
             </div>
@@ -609,7 +607,8 @@
         <div class="section-divider"></div>
         <p class="section-desc">God's grace spreading through our branches — find a church family near you.</p>
       </div>
-      <div class="branches-grid">
+      <div class="branches-grid" id="publicBranchesGrid">
+        <!-- Dynamically populated by main.js from backend -->
         <div class="branch-card" data-animate="fade-up" data-delay="0">
           <div class="branch-img-wrap">
             <div class="branch-img-placeholder branch-blue"><i class="fas fa-church"></i></div>
@@ -620,32 +619,6 @@
             <div class="branch-detail"><i class="fas fa-map-marker-alt"></i> Central District, City</div>
             <div class="branch-detail"><i class="fas fa-clock"></i> Every Saturday, 10:00 AM</div>
             <div class="branch-detail"><i class="fas fa-phone"></i> +91-98765-43210</div>
-            <a href="#contact" class="branch-btn">Get Directions</a>
-          </div>
-        </div>
-        <div class="branch-card" data-animate="fade-up" data-delay="100">
-          <div class="branch-img-wrap">
-            <div class="branch-img-placeholder branch-red"><i class="fas fa-church"></i></div>
-          </div>
-          <div class="branch-info">
-            <div class="branch-tag">North Branch</div>
-            <h4>Abhisek Methodist — North Campus</h4>
-            <div class="branch-detail"><i class="fas fa-map-marker-alt"></i> North District, City</div>
-            <div class="branch-detail"><i class="fas fa-clock"></i> Every Saturday, 9:30 AM</div>
-            <div class="branch-detail"><i class="fas fa-phone"></i> +91-98765-43211</div>
-            <a href="#contact" class="branch-btn">Get Directions</a>
-          </div>
-        </div>
-        <div class="branch-card" data-animate="fade-up" data-delay="200">
-          <div class="branch-img-wrap">
-            <div class="branch-img-placeholder branch-purple"><i class="fas fa-church"></i></div>
-          </div>
-          <div class="branch-info">
-            <div class="branch-tag">South Branch</div>
-            <h4>Abhisek Methodist — South Campus</h4>
-            <div class="branch-detail"><i class="fas fa-map-marker-alt"></i> South District, City</div>
-            <div class="branch-detail"><i class="fas fa-clock"></i> Every Saturday, 10:00 AM</div>
-            <div class="branch-detail"><i class="fas fa-phone"></i> +91-98765-43212</div>
             <a href="#contact" class="branch-btn">Get Directions</a>
           </div>
         </div>
@@ -664,7 +637,7 @@
           members.</p>
       </div>
       <div class="testimonies-slider-wrap" data-animate="fade-up">
-        <div class="testimonies-slider" id="testimoniesSlider">
+        <div class="testimonies-slider" id="testimoniesSlider" data-dynamic="true">
           <div class="testimony-card">
             <div class="tc-quote"><i class="fas fa-quote-left"></i></div>
             <p class="tc-text">Joining Abhisek Methodist Church changed my life completely. I had lost all hope, but
@@ -841,21 +814,21 @@
             <div class="cdc-icon"><i class="fas fa-map-marker-alt"></i></div>
             <div>
               <h4>Address</h4>
-              <p>Abhisek Methodist Church<br />Central District Road<br />City, State — 100001</p>
+              <p id="publicAddress">Abhisek Methodist Church<br />Central District Road<br />City, State — 100001</p>
             </div>
           </div>
           <div class="contact-detail-card">
             <div class="cdc-icon"><i class="fas fa-phone"></i></div>
             <div>
               <h4>Phone</h4>
-              <p>+91 98765 43210<br />+91 98765 43200</p>
+              <p id="publicPhone">+91 98765 43210<br />+91 98765 43200</p>
             </div>
           </div>
           <div class="contact-detail-card">
             <div class="cdc-icon"><i class="fas fa-envelope"></i></div>
             <div>
               <h4>Email</h4>
-              <p>info@abhisekmethodist.org<br />pastor@abhisekmethodist.org</p>
+              <p id="publicEmail">info@abhisekmethodist.org<br />pastor@abhisekmethodist.org</p>
             </div>
           </div>
           <div class="contact-detail-card">
@@ -905,7 +878,7 @@
       </div>
       <!-- Map Embed -->
       <div class="map-container" data-animate="fade-up">
-        <iframe
+        <iframe id="publicMapIframe"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.465!2d85.3142!3d27.7172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19!2sKathmandu!5e0!3m2!1sen!2snp!4v1673000000000!5m2!1sen!2snp"
           width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade" title="Church Location Map"></iframe>
@@ -981,6 +954,7 @@
         <p>© 2026 Abhisek Methodist Church. All rights reserved. Made with <i class="fas fa-heart"
             style="color:#f43f5e"></i> for God's glory.</p>
         <div class="footer-bottom-links">
+          <a href="admin.html">Admin Panel</a>
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
         </div>
